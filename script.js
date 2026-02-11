@@ -140,55 +140,131 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // — Procedural low-poly car —
+        // — GR Yaris-inspired hot hatch —
         const carGroup = new THREE.Group();
 
-        // Car body
+        // Main body — hot hatch profile (short, aggressive, wide)
         const bodyShape = new THREE.Shape();
-        bodyShape.moveTo(-2, 0);
-        bodyShape.lineTo(-2, 0.5);
-        bodyShape.lineTo(-1.5, 0.5);
-        bodyShape.lineTo(-1.1, 1.1);
-        bodyShape.lineTo(0.5, 1.1);
-        bodyShape.lineTo(1.0, 0.7);
-        bodyShape.lineTo(2, 0.6);
-        bodyShape.lineTo(2, 0.3);
-        bodyShape.lineTo(2, 0);
-        bodyShape.lineTo(-2, 0);
+        // Start from bottom-front, go clockwise
+        bodyShape.moveTo(-1.8, 0.0);    // front bottom
+        bodyShape.lineTo(-1.9, 0.15);   // front lip/splitter
+        bodyShape.lineTo(-1.85, 0.35);  // front bumper curve
+        bodyShape.lineTo(-1.7, 0.55);   // hood start
+        bodyShape.lineTo(-1.1, 0.60);   // hood flat
+        bodyShape.lineTo(-0.85, 0.65);  // windscreen base
+        bodyShape.lineTo(-0.35, 1.15);  // windscreen top (steep rake)
+        bodyShape.lineTo(0.0, 1.20);    // roof front
+        bodyShape.lineTo(0.5, 1.22);    // roof peak (subtle scoop area)
+        bodyShape.lineTo(0.9, 1.18);    // roof rear
+        bodyShape.lineTo(1.15, 1.05);   // rear glass top
+        bodyShape.lineTo(1.35, 0.80);   // rear glass bottom (short hatch)
+        bodyShape.lineTo(1.45, 0.78);   // spoiler lip up
+        bodyShape.lineTo(1.50, 0.85);   // spoiler tip
+        bodyShape.lineTo(1.55, 0.78);   // spoiler back
+        bodyShape.lineTo(1.60, 0.65);   // rear hatch
+        bodyShape.lineTo(1.65, 0.45);   // rear bumper top
+        bodyShape.lineTo(1.70, 0.30);   // rear bumper
+        bodyShape.lineTo(1.65, 0.15);   // rear diffuser
+        bodyShape.lineTo(1.55, 0.0);    // rear bottom
+        bodyShape.lineTo(-1.8, 0.0);    // close
 
-        const extrudeSettings = { depth: 1.2, bevelEnabled: true, bevelThickness: 0.05, bevelSize: 0.05, bevelSegments: 2 };
+        const extrudeSettings = { depth: 1.4, bevelEnabled: true, bevelThickness: 0.04, bevelSize: 0.04, bevelSegments: 3 };
         const bodyGeom = new THREE.ExtrudeGeometry(bodyShape, extrudeSettings);
         bodyGeom.center();
+
+        // Wireframe body
         const bodyMat = new THREE.MeshPhongMaterial({
             color: 0xE63946,
             wireframe: true,
             transparent: true,
-            opacity: 0.35
+            opacity: 0.4
         });
         const bodyMesh = new THREE.Mesh(bodyGeom, bodyMat);
         carGroup.add(bodyMesh);
 
-        // Solid subtle body
+        // Solid fill
         const bodySolid = new THREE.Mesh(bodyGeom, new THREE.MeshPhongMaterial({
             color: 0xE63946,
             transparent: true,
-            opacity: 0.08,
+            opacity: 0.1,
             side: THREE.DoubleSide
         }));
         carGroup.add(bodySolid);
 
-        // Wheels
-        const wheelGeom = new THREE.TorusGeometry(0.25, 0.08, 8, 16);
-        const wheelMat = new THREE.MeshPhongMaterial({ color: 0xFFFFFF, wireframe: true, transparent: true, opacity: 0.4 });
+        // Edge lines for definition
+        const edges = new THREE.EdgesGeometry(bodyGeom, 15);
+        const edgeMat = new THREE.LineBasicMaterial({ color: 0xFF4D4D, transparent: true, opacity: 0.6 });
+        const edgeLines = new THREE.LineSegments(edges, edgeMat);
+        carGroup.add(edgeLines);
+
+        // Wide-body fender flares (boxes on sides)
+        const flareGeom = new THREE.BoxGeometry(0.5, 0.2, 0.15);
+        const flareMat = new THREE.MeshPhongMaterial({ color: 0xE63946, wireframe: true, transparent: true, opacity: 0.3 });
+        [[-0.9, -0.15, 0.75], [-0.9, -0.15, -0.75], [0.8, -0.15, 0.75], [0.8, -0.15, -0.75]].forEach(pos => {
+            const flare = new THREE.Mesh(flareGeom, flareMat);
+            flare.position.set(...pos);
+            carGroup.add(flare);
+        });
+
+        // Wheels — detailed with rim spokes
+        const tireGeom = new THREE.TorusGeometry(0.28, 0.1, 12, 24);
+        const tireMat = new THREE.MeshPhongMaterial({ color: 0x333333, wireframe: true, transparent: true, opacity: 0.5 });
+        const rimGeom = new THREE.CylinderGeometry(0.2, 0.2, 0.08, 5, 1);
+        const rimMat = new THREE.MeshPhongMaterial({ color: 0xFFFFFF, wireframe: true, transparent: true, opacity: 0.5 });
+        const brakeGeom = new THREE.TorusGeometry(0.15, 0.02, 8, 16);
+        const brakeMat = new THREE.MeshPhongMaterial({ color: 0xE63946, wireframe: true, transparent: true, opacity: 0.6 });
+
         const wheelPositions = [
-            [-1.2, -0.35, 0.7], [-1.2, -0.35, -0.7],
-            [1.2, -0.35, 0.7], [1.2, -0.35, -0.7]
+            [-1.1, -0.25, 0.78], [-1.1, -0.25, -0.78],
+            [1.05, -0.25, 0.78], [1.05, -0.25, -0.78]
         ];
+        const wheels = [];
         wheelPositions.forEach(pos => {
-            const wheel = new THREE.Mesh(wheelGeom, wheelMat);
-            wheel.position.set(...pos);
-            wheel.rotation.y = Math.PI / 2;
-            carGroup.add(wheel);
+            const wheelGroup = new THREE.Group();
+            const tire = new THREE.Mesh(tireGeom, tireMat);
+            tire.rotation.y = Math.PI / 2;
+            wheelGroup.add(tire);
+            const rim = new THREE.Mesh(rimGeom, rimMat);
+            rim.rotation.x = Math.PI / 2;
+            wheelGroup.add(rim);
+            const brake = new THREE.Mesh(brakeGeom, brakeMat);
+            brake.rotation.y = Math.PI / 2;
+            wheelGroup.add(brake);
+            wheelGroup.position.set(...pos);
+            carGroup.add(wheelGroup);
+            wheels.push(wheelGroup);
+        });
+
+        // Roof scoop (GR Yaris signature)
+        const scoopGeom = new THREE.BoxGeometry(0.25, 0.08, 0.3);
+        const scoopMat = new THREE.MeshPhongMaterial({ color: 0xFFFFFF, wireframe: true, transparent: true, opacity: 0.4 });
+        const scoop = new THREE.Mesh(scoopGeom, scoopMat);
+        scoop.position.set(-0.1, 0.68, 0);
+        carGroup.add(scoop);
+
+        // Front grille
+        const grilleGeom = new THREE.PlaneGeometry(0.15, 0.7);
+        const grilleMat = new THREE.MeshPhongMaterial({ color: 0x333333, wireframe: true, transparent: true, opacity: 0.4, side: THREE.DoubleSide });
+        const grille = new THREE.Mesh(grilleGeom, grilleMat);
+        grille.position.set(-1.88, 0.25, 0);
+        grille.rotation.y = Math.PI / 2;
+        carGroup.add(grille);
+
+        // Headlights
+        const headlightGeom = new THREE.SphereGeometry(0.08, 8, 8);
+        const headlightMat = new THREE.MeshPhongMaterial({ color: 0xFFFFFF, emissive: 0xFFFFFF, emissiveIntensity: 0.5, transparent: true, opacity: 0.7 });
+        [[-1.85, 0.45, 0.45], [-1.85, 0.45, -0.45]].forEach(pos => {
+            const light = new THREE.Mesh(headlightGeom, headlightMat);
+            light.position.set(...pos);
+            carGroup.add(light);
+        });
+
+        // Taillights
+        const taillightMat = new THREE.MeshPhongMaterial({ color: 0xE63946, emissive: 0xE63946, emissiveIntensity: 0.5, transparent: true, opacity: 0.7 });
+        [[1.62, 0.45, 0.4], [1.62, 0.45, -0.4]].forEach(pos => {
+            const light = new THREE.Mesh(headlightGeom, taillightMat);
+            light.position.set(...pos);
+            carGroup.add(light);
         });
 
         carGroup.position.set(1.5, -0.2, 0);
@@ -287,6 +363,11 @@
             carGroup.rotation.y = -0.3 + Math.sin(t * 0.3) * 0.15 + mouse.nx * 0.2;
             carGroup.rotation.x = mouse.ny * 0.1;
             carGroup.position.y = -0.2 + Math.sin(t * 0.5) * 0.08;
+
+            // Spin wheels
+            if (typeof wheels !== 'undefined') {
+                wheels.forEach(w => { w.rotation.z = t * 2; });
+            }
 
             // Gears
             gear1.rotation.z = t * 0.3;
