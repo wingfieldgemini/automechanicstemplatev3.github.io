@@ -329,6 +329,7 @@ body:hover .cursor-follower { border-color: rgba(230,57,70,.5); }
     object-fit: contain;
     transition: opacity 1.2s ease, transform 1.2s ease;
     filter: drop-shadow(0 0 40px rgba(230,57,70,0.15));
+    mix-blend-mode: lighten;
 }
 .hero-car {
     opacity: 0;
