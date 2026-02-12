@@ -43,7 +43,7 @@ body {
     background: var(--black);
     color: var(--white);
     overflow-x: hidden;
-    cursor: none;
+    cursor: default;
 }
 
 a { color: inherit; text-decoration: none; }
