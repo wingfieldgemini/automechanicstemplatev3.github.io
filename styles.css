@@ -245,21 +245,17 @@ button:hover ~ .cursor-follower { transform: scale(1.5); }
     transition: opacity 1.2s ease, transform 1.2s ease;
     filter: drop-shadow(0 0 40px rgba(230,57,70,0.15));
 }
-.hero-car-front {
+.hero-car {
+    opacity: 0;
+    transform: translateX(40px) scale(0.95);
+}
+.hero-car.active {
     opacity: 1;
     transform: translateX(0) scale(1);
 }
-.hero-car-rear {
+.hero-car.exiting {
     opacity: 0;
-    transform: translateX(30px) scale(0.97);
-}
-.hero-car-showcase.show-rear .hero-car-front {
-    opacity: 0;
-    transform: translateX(-30px) scale(0.97);
-}
-.hero-car-showcase.show-rear .hero-car-rear {
-    opacity: 1;
-    transform: translateX(0) scale(1);
+    transform: translateX(-40px) scale(0.95);
 }
 @media (max-width: 768px) {
     .hero-car-showcase {

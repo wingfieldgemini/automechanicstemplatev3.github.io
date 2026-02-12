@@ -129,29 +129,28 @@
 
     // ======== CAR IMAGE ROTATION ========
     function initCarShowcase() {
-        const showcase = document.querySelector('.hero-car-showcase');
+        const showcase = document.getElementById('carShowcase');
         if (!showcase) return;
-        // Alternate between front and rear every 4 seconds
-        let showRear = false;
-        setInterval(() => {
-            showRear = !showRear;
-            showcase.classList.toggle('show-rear', showRear);
-        }, 4000);
+        const cars = showcase.querySelectorAll('.hero-car');
+        if (cars.length === 0) return;
+        let current = 0;
 
-        // Also respond to mouse — moving right shows rear, left shows front
+        setInterval(() => {
+            const prev = current;
+            current = (current + 1) % cars.length;
+            cars[prev].classList.remove('active');
+            cars[prev].classList.add('exiting');
+            cars[current].classList.add('active');
+            setTimeout(() => { cars[prev].classList.remove('exiting'); }, 1200);
+        }, 3500);
+
+        // Mouse parallax on active car
         document.addEventListener('mousemove', (e) => {
-            const carFront = document.getElementById('carFront');
-            const carRear = document.getElementById('carRear');
-            if (!carFront || !carRear) return;
-            // Subtle parallax shift on mouse
+            const active = showcase.querySelector('.hero-car.active');
+            if (!active) return;
             const mx = (e.clientX / window.innerWidth - 0.5) * 20;
             const my = (e.clientY / window.innerHeight - 0.5) * 10;
-            carFront.style.transform = showcase.classList.contains('show-rear')
-                ? `translateX(-30px) scale(0.97)`
-                : `translateX(${mx}px) translateY(${my}px) scale(1)`;
-            carRear.style.transform = showcase.classList.contains('show-rear')
-                ? `translateX(${mx}px) translateY(${my}px) scale(1)`
-                : `translateX(30px) scale(0.97)`;
+            active.style.transform = `translateX(${mx}px) translateY(${my}px) scale(1)`;
         });
     }
 
