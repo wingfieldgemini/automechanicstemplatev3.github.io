@@ -1,5 +1,5 @@
 /* ============================================
-   APEX AUTO — Premium 3D Script
+   APEX AUTO — Premium Multi-Page Script
    ============================================ */
 
 (function () {
@@ -30,7 +30,7 @@
         }
         animateCursor();
 
-        document.querySelectorAll('a, button, .service-card, .gallery-card, .why-card').forEach(el => {
+        document.querySelectorAll('a, button, .service-card, .gallery-card, .why-card, .team-card, .brand-card').forEach(el => {
             el.addEventListener('mouseenter', () => {
                 follower.style.width = '56px';
                 follower.style.height = '56px';
@@ -44,7 +44,7 @@
         });
     }
 
-    // ======== LOADER ========
+    // ======== LOADER (home page only) ========
     const loader = document.getElementById('loader');
     const rpmFill = document.querySelector('.rpm-fill');
     const rpmText = document.querySelector('.rpm-text');
@@ -76,8 +76,10 @@
     const navLinks = document.getElementById('navLinks');
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 80) nav.classList.add('scrolled');
-        else nav.classList.remove('scrolled');
+        if (nav) {
+            if (window.scrollY > 80) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        }
     });
 
     if (navToggle && navLinks) {
@@ -144,7 +146,6 @@
             setTimeout(() => { cars[prev].classList.remove('exiting'); }, 1200);
         }, 3500);
 
-        // Mouse parallax on active car
         document.addEventListener('mousemove', (e) => {
             const active = showcase.querySelector('.hero-car.active');
             if (!active) return;
@@ -176,12 +177,11 @@
         }
     }
 
-    // Keep old function name for init compatibility
+    // ======== THREE.JS HERO SCENE ========
     function initHeroScene() {
         initCarShowcase();
         initHeroParticles();
 
-        // Keep Three.js canvas for backward compat but skip if no canvas
         const canvas = document.getElementById('heroCanvas');
         if (!canvas || typeof THREE === 'undefined') return;
 
@@ -193,9 +193,6 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // — No 3D car model — using image-based showcase instead —
-
-        // — Floating gear objects —
         const gearGroup = new THREE.Group();
         function createGear(radius, inner, teeth) {
             const shape = new THREE.Shape();
@@ -220,30 +217,24 @@
                 else hole.lineTo(Math.cos(a) * inner, Math.sin(a) * inner);
             }
             shape.holes.push(hole);
-            const geom = new THREE.ExtrudeGeometry(shape, { depth: 0.1, bevelEnabled: false });
-            return geom;
+            return new THREE.ExtrudeGeometry(shape, { depth: 0.1, bevelEnabled: false });
         }
 
         const gearMat = new THREE.MeshPhongMaterial({ color: 0xE63946, wireframe: true, transparent: true, opacity: 0.2 });
-
         const gear1 = new THREE.Mesh(createGear(0.5, 0.2, 12), gearMat);
         gear1.position.set(-3, 1.5, -2);
         gearGroup.add(gear1);
-
         const gear2 = new THREE.Mesh(createGear(0.35, 0.12, 8), gearMat.clone());
         gear2.material.color.setHex(0xFFFFFF);
         gear2.material.opacity = 0.12;
         gear2.position.set(3.5, -1, -1);
         gearGroup.add(gear2);
-
         const gear3 = new THREE.Mesh(createGear(0.4, 0.15, 10), gearMat.clone());
         gear3.material.opacity = 0.15;
         gear3.position.set(-2.5, -1.5, -3);
         gearGroup.add(gear3);
-
         scene.add(gearGroup);
 
-        // — Particle field —
         const particleCount = 600;
         const particleGeom = new THREE.BufferGeometry();
         const positions = new Float32Array(particleCount * 3);
@@ -257,16 +248,13 @@
         const particles = new THREE.Points(particleGeom, particleMat);
         scene.add(particles);
 
-        // — Grid floor —
         const gridHelper = new THREE.GridHelper(30, 40, 0x222222, 0x1a1a1a);
         gridHelper.position.y = -2;
         gridHelper.material.transparent = true;
         gridHelper.material.opacity = 0.3;
         scene.add(gridHelper);
 
-        // — Lighting —
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-        scene.add(ambientLight);
+        scene.add(new THREE.AmbientLight(0xffffff, 0.4));
         const dirLight = new THREE.DirectionalLight(0xE63946, 0.8);
         dirLight.position.set(5, 5, 5);
         scene.add(dirLight);
@@ -274,32 +262,21 @@
         dirLight2.position.set(-5, 3, -5);
         scene.add(dirLight2);
 
-        // — Animation —
         let scrollY = 0;
         window.addEventListener('scroll', () => { scrollY = window.scrollY; });
 
         function animate() {
             requestAnimationFrame(animate);
-
             const t = performance.now() * 0.001;
-
-            // Gears
-            if (typeof gear1 !== 'undefined') {
-                gear1.rotation.z = t * 0.3;
-                gear2.rotation.z = -t * 0.4;
-                gear3.rotation.z = t * 0.25;
-                gearGroup.children.forEach((g, i) => {
-                    g.position.y += Math.sin(t + i * 2) * 0.001;
-                });
-            }
-
-            // Particles respond to scroll
+            gear1.rotation.z = t * 0.3;
+            gear2.rotation.z = -t * 0.4;
+            gear3.rotation.z = t * 0.25;
+            gearGroup.children.forEach((g, i) => {
+                g.position.y += Math.sin(t + i * 2) * 0.001;
+            });
             particles.rotation.y = t * 0.02 + scrollY * 0.0002;
             particles.rotation.x = scrollY * 0.0001;
-
-            // Grid parallax
             gridHelper.position.z = -scrollY * 0.002;
-
             renderer.render(scene, camera);
         }
         animate();
@@ -325,7 +302,6 @@
         renderer.setSize(section.offsetWidth, section.offsetHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // Grid of dots
         const gridSize = 20;
         const spacing = 0.6;
         const dotsGeom = new THREE.BufferGeometry();

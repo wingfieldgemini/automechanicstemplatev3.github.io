@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="page-fade">
     <!-- Loading Screen -->
     <div id="loader" class="loader">
         <div class="loader-inner">
@@ -33,23 +33,34 @@
     <!-- Navigation -->
     <nav class="nav" id="nav">
         <div class="nav-container">
-            <a href="#" class="nav-logo">
+            <a href="index.html" class="nav-logo">
                 <span class="logo-icon">⬡</span>
                 <span class="logo-text">APEX<span class="logo-accent">AUTO</span></span>
             </a>
             <div class="nav-links" id="navLinks">
-                <a href="#services">Services</a>
-                <a href="#about">About</a>
-                <a href="#gallery">Workshop</a>
-                <a href="#testimonials">Reviews</a>
-                <a href="#contact">Contact</a>
-                <a href="tel:+64041234567" class="nav-cta">04 123 4567</a>
+                <a href="index.html" class="active">Home</a>
+                <a href="services.html">Services</a>
+                <a href="about.html">About</a>
+                <a href="gallery.html">Workshop</a>
+                <a href="testimonials.html">Reviews</a>
+                <a href="brands.html">Brands</a>
+                <a href="contact.html">Contact</a>
+                <a href="tel:+64041234567" class="nav-cta">📞 04 123 4567</a>
             </div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
             </button>
         </div>
     </nav>
+
+    <!-- Emergency Banner -->
+    <div class="emergency-strip">
+        <div class="container emergency-strip-inner">
+            <span class="emergency-strip-pulse"></span>
+            <span>24/7 BREAKDOWN ASSISTANCE</span>
+            <a href="tel:+640800APEX"><strong>0800 APEX AUTO</strong></a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
@@ -73,8 +84,8 @@
             </h1>
             <p class="hero-sub reveal-up" style="--delay:.55s">Master certified technicians. Cutting-edge diagnostics.<br>Uncompromising quality for every vehicle.</p>
             <div class="hero-ctas reveal-up" style="--delay:.7s">
-                <a href="#booking" class="btn btn-primary">Book a Service</a>
-                <a href="#contact" class="btn btn-outline">Get a Quote</a>
+                <a href="contact.html" class="btn btn-primary">Book a Service</a>
+                <a href="contact.html" class="btn btn-outline">Get a Quote</a>
             </div>
             <div class="hero-scroll reveal-up" style="--delay:.9s">
                 <div class="scroll-line"></div>
@@ -83,7 +94,7 @@
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- Services Highlight (4 cards) -->
     <section class="section services" id="services">
         <div class="container">
             <div class="section-header">
@@ -91,7 +102,7 @@
                 <h2 class="section-title reveal-up">Expert <span class="gradient-text">Services</span></h2>
                 <p class="section-desc reveal-up">From routine maintenance to complex repairs, our master technicians handle it all with precision and care.</p>
             </div>
-            <div class="services-grid">
+            <div class="services-grid services-grid--highlight">
                 <div class="service-card reveal-up" style="--delay:0s">
                     <div class="service-icon">⚡</div>
                     <h3>Engine Diagnostics & Repair</h3>
@@ -112,93 +123,9 @@
                     <h3>Transmission</h3>
                     <p>Manual and automatic transmission servicing, repair and rebuilds by specialists.</p>
                 </div>
-                <div class="service-card reveal-up" style="--delay:.2s">
-                    <div class="service-icon">⊕</div>
-                    <h3>Suspension & Steering</h3>
-                    <p>Wheel alignment, shock absorbers, power steering and complete suspension overhauls.</p>
-                </div>
-                <div class="service-card reveal-up" style="--delay:.25s">
-                    <div class="service-icon">⏚</div>
-                    <h3>Electrical Systems</h3>
-                    <p>Battery, alternator, starter motor and complex wiring diagnostics and repair.</p>
-                </div>
-                <div class="service-card reveal-up" style="--delay:.3s">
-                    <div class="service-icon">❄</div>
-                    <h3>Air Conditioning</h3>
-                    <p>Full A/C service, re-gas, leak detection and climate control system repairs.</p>
-                </div>
-                <div class="service-card reveal-up" style="--delay:.35s">
-                    <div class="service-icon">⟁</div>
-                    <h3>Cambelt & Timing</h3>
-                    <p>Critical cambelt and timing chain replacement to protect your engine investment.</p>
-                </div>
-                <div class="service-card reveal-up" style="--delay:.4s">
-                    <div class="service-icon">◎</div>
-                    <h3>Turbo Repairs</h3>
-                    <p>Turbocharger diagnostics, repair and replacement for peak performance.</p>
-                </div>
-                <div class="service-card reveal-up" style="--delay:.45s">
-                    <div class="service-icon">▦</div>
-                    <h3>Fleet Servicing</h3>
-                    <p>Comprehensive fleet maintenance programs with priority scheduling and reporting.</p>
-                </div>
             </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="section about" id="about">
-        <div class="container">
-            <div class="about-grid">
-                <div class="about-visual reveal-left">
-                    <div class="about-image-stack">
-                        <div class="about-img about-img-1">
-                            <div class="img-placeholder">
-                                <span>🔧</span>
-                                <p>Master Technicians at Work</p>
-                            </div>
-                        </div>
-                        <div class="about-img about-img-2">
-                            <div class="img-placeholder">
-                                <span>🏎️</span>
-                                <p>State-of-the-Art Workshop</p>
-                            </div>
-                        </div>
-                        <div class="about-experience-badge">
-                            <span class="exp-number">25</span>
-                            <span class="exp-label">Years of<br>Excellence</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-content reveal-right">
-                    <span class="section-tag">OUR STORY</span>
-                    <h2 class="section-title">Built on Trust,<br>Driven by <span class="gradient-text">Excellence</span></h2>
-                    <p>Founded in 1999, Apex Auto has grown from a small workshop in Lower Hutt to Wellington's most trusted name in automotive care. Our team of master-certified technicians combines decades of experience with the latest diagnostic technology.</p>
-                    <p>We believe every vehicle deserves the same meticulous attention — whether it's a family hatchback or a high-performance sports car. That commitment to quality has earned us the loyalty of thousands of Wellington drivers.</p>
-                    <div class="about-values">
-                        <div class="value-item">
-                            <div class="value-icon">◆</div>
-                            <div>
-                                <strong>Integrity</strong>
-                                <span>Honest diagnostics, transparent pricing</span>
-                            </div>
-                        </div>
-                        <div class="value-item">
-                            <div class="value-icon">◆</div>
-                            <div>
-                                <strong>Precision</strong>
-                                <span>Meticulous work, every single time</span>
-                            </div>
-                        </div>
-                        <div class="value-item">
-                            <div class="value-icon">◆</div>
-                            <div>
-                                <strong>Innovation</strong>
-                                <span>Latest tools and techniques</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="section-cta reveal-up" style="--delay:.25s">
+                <a href="services.html" class="btn btn-outline">View All Services →</a>
             </div>
         </div>
     </section>
@@ -232,171 +159,6 @@
         </div>
     </section>
 
-    <!-- Why Choose Us -->
-    <section class="section why-us" id="why-us">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag reveal-up">THE APEX DIFFERENCE</span>
-                <h2 class="section-title reveal-up">Why Choose <span class="gradient-text">Apex Auto</span></h2>
-            </div>
-            <div class="why-grid">
-                <div class="why-card reveal-up" style="--delay:0s">
-                    <div class="why-icon">🏆</div>
-                    <h3>Master Certified</h3>
-                    <p>Our technicians hold the highest industry certifications and undergo continuous training.</p>
-                </div>
-                <div class="why-card reveal-up" style="--delay:.07s">
-                    <div class="why-icon">🔬</div>
-                    <h3>Latest Diagnostics</h3>
-                    <p>State-of-the-art diagnostic equipment for accurate fault finding on all vehicle makes.</p>
-                </div>
-                <div class="why-card reveal-up" style="--delay:.14s">
-                    <div class="why-icon">💰</div>
-                    <h3>Transparent Pricing</h3>
-                    <p>Upfront quotes with no hidden costs. You approve every job before we start.</p>
-                </div>
-                <div class="why-card reveal-up" style="--delay:.21s">
-                    <div class="why-icon">🛡️</div>
-                    <h3>Warranty on All Work</h3>
-                    <p>Every repair backed by our comprehensive warranty for your peace of mind.</p>
-                </div>
-                <div class="why-card reveal-up" style="--delay:.28s">
-                    <div class="why-icon">🚗</div>
-                    <h3>Courtesy Cars</h3>
-                    <p>Free courtesy vehicles available so you're never left stranded.</p>
-                </div>
-                <div class="why-card reveal-up" style="--delay:.35s">
-                    <div class="why-icon">📋</div>
-                    <h3>Free Quotes</h3>
-                    <p>No-obligation assessments and quotes. Know the cost before committing.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section -->
-    <section class="section gallery" id="gallery">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag reveal-up">OUR WORKSHOP</span>
-                <h2 class="section-title reveal-up">Where Precision <span class="gradient-text">Happens</span></h2>
-            </div>
-            <div class="gallery-grid">
-                <div class="gallery-card gallery-card-lg reveal-up" style="--delay:0s">
-                    <div class="gallery-placeholder"><span>🏗️</span><p>Workshop Floor — 6 Service Bays</p></div>
-                    <div class="gallery-overlay"><h4>Modern Workshop</h4><p>6 fully-equipped service bays with hoist capacity up to 5 tonnes</p></div>
-                </div>
-                <div class="gallery-card reveal-up" style="--delay:.07s">
-                    <div class="gallery-placeholder"><span>🖥️</span><p>Diagnostic Lab</p></div>
-                    <div class="gallery-overlay"><h4>Diagnostic Centre</h4><p>Latest OBD-II and manufacturer-specific scan tools</p></div>
-                </div>
-                <div class="gallery-card reveal-up" style="--delay:.14s">
-                    <div class="gallery-placeholder"><span>👨‍🔧</span><p>The Team</p></div>
-                    <div class="gallery-overlay"><h4>Expert Team</h4><p>8 master-certified technicians with 100+ years combined experience</p></div>
-                </div>
-                <div class="gallery-card reveal-up" style="--delay:.21s">
-                    <div class="gallery-placeholder"><span>⚙️</span><p>Engine Bay</p></div>
-                    <div class="gallery-overlay"><h4>Engine Specialists</h4><p>Complete engine rebuild and performance tuning capabilities</p></div>
-                </div>
-                <div class="gallery-card reveal-up" style="--delay:.28s">
-                    <div class="gallery-placeholder"><span>🔩</span><p>Parts Department</p></div>
-                    <div class="gallery-overlay"><h4>Genuine Parts</h4><p>OEM and quality aftermarket parts always in stock</p></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="section testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag reveal-up">CLIENT REVIEWS</span>
-                <h2 class="section-title reveal-up">Trusted by <span class="gradient-text">Wellington</span></h2>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card reveal-up" style="--delay:0s">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p>"Absolutely outstanding service. They diagnosed an issue two other workshops missed and had my car running perfectly within a day. Transparent pricing, no surprises."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">JM</div>
-                        <div><strong>James Mitchell</strong><span>Karori — BMW 320i</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card reveal-up" style="--delay:.08s">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p>"Been bringing all our family cars here for 8 years. The team is honest, skilled, and always goes above and beyond. Best mechanics in Wellington, hands down."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SW</div>
-                        <div><strong>Sarah Watson</strong><span>Johnsonville — Toyota RAV4</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card reveal-up" style="--delay:.16s">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p>"They saved my Subaru's turbo when the dealer said it needed full replacement. Half the cost, twice the care. These guys really know their stuff."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">DT</div>
-                        <div><strong>David Thompson</strong><span>Petone — Subaru WRX</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card reveal-up" style="--delay:.24s">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p>"Needed an urgent WOF for a vehicle sale. They fitted me in same day, found a minor issue, fixed it on the spot and had me out within 2 hours. Legends."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">LP</div>
-                        <div><strong>Lisa Park</strong><span>Miramar — Honda Civic</span></div>
-                    </div>
-                </div>
-                <div class="testimonial-card reveal-up" style="--delay:.32s">
-                    <div class="testimonial-stars">★★★★★</div>
-                    <p>"Our company fleet of 12 vans has never run better. Their fleet program saves us time and money. Professional, reliable, and always communicative."</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">RC</div>
-                        <div><strong>Rob Clarke</strong><span>Wellington CBD — Fleet Manager</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Brands Section -->
-    <section class="section brands" id="brands">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag reveal-up">ALL MAKES & MODELS</span>
-                <h2 class="section-title reveal-up">Brands We <span class="gradient-text">Service</span></h2>
-            </div>
-            <div class="brands-track reveal-up">
-                <div class="brands-scroll">
-                    <div class="brand-item">TOYOTA</div>
-                    <div class="brand-item">HONDA</div>
-                    <div class="brand-item">BMW</div>
-                    <div class="brand-item">MERCEDES</div>
-                    <div class="brand-item">SUBARU</div>
-                    <div class="brand-item">FORD</div>
-                    <div class="brand-item">MAZDA</div>
-                    <div class="brand-item">NISSAN</div>
-                    <div class="brand-item">AUDI</div>
-                    <div class="brand-item">VOLKSWAGEN</div>
-                    <div class="brand-item">HYUNDAI</div>
-                    <div class="brand-item">KIA</div>
-                    <!-- Duplicate for infinite scroll -->
-                    <div class="brand-item">TOYOTA</div>
-                    <div class="brand-item">HONDA</div>
-                    <div class="brand-item">BMW</div>
-                    <div class="brand-item">MERCEDES</div>
-                    <div class="brand-item">SUBARU</div>
-                    <div class="brand-item">FORD</div>
-                    <div class="brand-item">MAZDA</div>
-                    <div class="brand-item">NISSAN</div>
-                    <div class="brand-item">AUDI</div>
-                    <div class="brand-item">VOLKSWAGEN</div>
-                    <div class="brand-item">HYUNDAI</div>
-                    <div class="brand-item">KIA</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Emergency Banner -->
     <section class="emergency" id="emergency">
         <div class="container">
@@ -418,6 +180,37 @@
         </div>
     </section>
 
+    <!-- 2 Testimonials -->
+    <section class="section testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag reveal-up">CLIENT REVIEWS</span>
+                <h2 class="section-title reveal-up">Trusted by <span class="gradient-text">Wellington</span></h2>
+            </div>
+            <div class="testimonials-grid testimonials-grid--highlight">
+                <div class="testimonial-card reveal-up" style="--delay:0s">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p>"Absolutely outstanding service. They diagnosed an issue two other workshops missed and had my car running perfectly within a day. Transparent pricing, no surprises."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JM</div>
+                        <div><strong>James Mitchell</strong><span>Karori — BMW 320i</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal-up" style="--delay:.08s">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p>"Been bringing all our family cars here for 8 years. The team is honest, skilled, and always goes above and beyond. Best mechanics in Wellington, hands down."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SW</div>
+                        <div><strong>Sarah Watson</strong><span>Johnsonville — Toyota RAV4</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-cta reveal-up">
+                <a href="testimonials.html" class="btn btn-outline">Read All Reviews →</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Booking CTA -->
     <section class="section booking" id="booking">
         <div class="container">
@@ -425,131 +218,8 @@
                 <h2 class="section-title">Book Your Service <span class="gradient-text">Today</span></h2>
                 <p>Don't wait for small problems to become big ones. Schedule your appointment online or give us a call.</p>
                 <div class="booking-ctas">
-                    <a href="#contact" class="btn btn-primary btn-lg">Book Online Now</a>
+                    <a href="contact.html" class="btn btn-primary btn-lg">Book Online Now</a>
                     <a href="tel:+64041234567" class="btn btn-outline btn-lg">Call 04 123 4567</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Service Areas -->
-    <section class="section areas" id="areas">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag reveal-up">COVERAGE</span>
-                <h2 class="section-title reveal-up">Service <span class="gradient-text">Areas</span></h2>
-                <p class="section-desc reveal-up">Proudly serving the greater Wellington region.</p>
-            </div>
-            <div class="areas-grid reveal-up">
-                <span class="area-tag">Wellington CBD</span>
-                <span class="area-tag">Lower Hutt</span>
-                <span class="area-tag">Upper Hutt</span>
-                <span class="area-tag">Petone</span>
-                <span class="area-tag">Porirua</span>
-                <span class="area-tag">Karori</span>
-                <span class="area-tag">Johnsonville</span>
-                <span class="area-tag">Miramar</span>
-                <span class="area-tag">Kilbirnie</span>
-                <span class="area-tag">Newtown</span>
-                <span class="area-tag">Island Bay</span>
-                <span class="area-tag">Tawa</span>
-                <span class="area-tag">Thorndon</span>
-                <span class="area-tag">Te Aro</span>
-                <span class="area-tag">Brooklyn</span>
-                <span class="area-tag">Seatoun</span>
-                <span class="area-tag">Eastbourne</span>
-                <span class="area-tag">Wainuiomata</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="section contact" id="contact">
-        <div class="container">
-            <div class="contact-grid">
-                <div class="contact-info reveal-left">
-                    <span class="section-tag">GET IN TOUCH</span>
-                    <h2 class="section-title">Let's Talk <span class="gradient-text">Cars</span></h2>
-                    <p>Have a question or ready to book? Reach out and our team will get back to you promptly.</p>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <div class="contact-icon">📍</div>
-                            <div>
-                                <strong>Visit Us</strong>
-                                <span>42 Thorndon Quay<br>Wellington 6011, New Zealand</span>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">📞</div>
-                            <div>
-                                <strong>Call Us</strong>
-                                <span><a href="tel:+64041234567">04 123 4567</a></span>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">✉️</div>
-                            <div>
-                                <strong>Email Us</strong>
-                                <span><a href="mailto:service@apexauto.co.nz">service@apexauto.co.nz</a></span>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">🕐</div>
-                            <div>
-                                <strong>Hours</strong>
-                                <span>Mon–Fri: 7:30am – 5:30pm<br>Sat: 8am – 1pm | Sun: Closed</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Map Placeholder -->
-                    <div class="map-placeholder">
-                        <span>📍 Wellington, NZ — Map</span>
-                    </div>
-                </div>
-                <div class="contact-form-wrap reveal-right">
-                    <form class="contact-form" id="contactForm">
-                        <h3>Request a Quote</h3>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="text" placeholder="Full Name *" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="tel" placeholder="Phone *" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Email Address *" required>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="text" placeholder="Vehicle Make & Model">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" placeholder="Year / Rego">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <select>
-                                <option value="">Select Service Required</option>
-                                <option>Engine Diagnostics & Repair</option>
-                                <option>WOF Inspection</option>
-                                <option>Brake Services</option>
-                                <option>Transmission</option>
-                                <option>Suspension & Steering</option>
-                                <option>Electrical Systems</option>
-                                <option>Air Conditioning</option>
-                                <option>Cambelt & Timing</option>
-                                <option>Turbo Repairs</option>
-                                <option>Fleet Servicing</option>
-                                <option>General Service</option>
-                                <option>Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <textarea rows="4" placeholder="Tell us about the issue or service you need..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-full">Send Request</button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -560,7 +230,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="#" class="nav-logo">
+                    <a href="index.html" class="nav-logo">
                         <span class="logo-icon">⬡</span>
                         <span class="logo-text">APEX<span class="logo-accent">AUTO</span></span>
                     </a>
@@ -573,21 +243,21 @@
                 </div>
                 <div class="footer-links">
                     <h4>Services</h4>
-                    <a href="#services">Engine Repair</a>
-                    <a href="#services">WOF Inspections</a>
-                    <a href="#services">Brake Services</a>
-                    <a href="#services">Transmission</a>
-                    <a href="#services">Air Conditioning</a>
-                    <a href="#services">Fleet Servicing</a>
+                    <a href="services.html">Engine Repair</a>
+                    <a href="services.html">WOF Inspections</a>
+                    <a href="services.html">Brake Services</a>
+                    <a href="services.html">Transmission</a>
+                    <a href="services.html">Air Conditioning</a>
+                    <a href="services.html">Fleet Servicing</a>
                 </div>
                 <div class="footer-links">
                     <h4>Quick Links</h4>
-                    <a href="#about">About Us</a>
-                    <a href="#gallery">Workshop</a>
-                    <a href="#testimonials">Reviews</a>
-                    <a href="#booking">Book a Service</a>
-                    <a href="#contact">Contact</a>
-                    <a href="#areas">Service Areas</a>
+                    <a href="about.html">About Us</a>
+                    <a href="gallery.html">Workshop</a>
+                    <a href="testimonials.html">Reviews</a>
+                    <a href="contact.html">Book a Service</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="brands.html">Service Areas</a>
                 </div>
                 <div class="footer-links">
                     <h4>Contact</h4>
