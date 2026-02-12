@@ -14,35 +14,7 @@
         mouse.ny = -(e.clientY / window.innerHeight) * 2 + 1;
     });
 
-    // ======== CUSTOM CURSOR ========
-    const cursor = document.getElementById('cursor');
-    const follower = document.getElementById('cursorFollower');
-    if (cursor && follower) {
-        let cx = 0, cy = 0, fx = 0, fy = 0;
-        function animateCursor() {
-            cx += (mouse.x - cx) * 0.2;
-            cy += (mouse.y - cy) * 0.2;
-            fx += (mouse.x - fx) * 0.08;
-            fy += (mouse.y - fy) * 0.08;
-            cursor.style.transform = `translate(${cx - 4}px, ${cy - 4}px)`;
-            follower.style.transform = `translate(${fx - 18}px, ${fy - 18}px)`;
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        document.querySelectorAll('a, button, .service-card, .gallery-card, .why-card, .team-card, .brand-card').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                follower.style.width = '56px';
-                follower.style.height = '56px';
-                follower.style.borderColor = 'rgba(230,57,70,.8)';
-            });
-            el.addEventListener('mouseleave', () => {
-                follower.style.width = '36px';
-                follower.style.height = '36px';
-                follower.style.borderColor = 'rgba(230,57,70,.5)';
-            });
-        });
-    }
+    // ======== CUSTOM CURSOR (disabled for performance) ========
 
     // ======== LOADER (home page only) ========
     const loader = document.getElementById('loader');
@@ -146,13 +118,7 @@
             setTimeout(() => { cars[prev].classList.remove('exiting'); }, 1200);
         }, 3500);
 
-        document.addEventListener('mousemove', (e) => {
-            const active = showcase.querySelector('.hero-car.active');
-            if (!active) return;
-            const mx = (e.clientX / window.innerWidth - 0.5) * 20;
-            const my = (e.clientY / window.innerHeight - 0.5) * 10;
-            active.style.transform = `translateX(${mx}px) translateY(${my}px) scale(1)`;
-        });
+        // Mouse parallax disabled for performance
     }
 
     // ======== HERO PARTICLES (CSS-based) ========
@@ -319,8 +285,8 @@
         function animate() {
             requestAnimationFrame(animate);
             const t = performance.now() * 0.001;
-            dots.rotation.x = Math.sin(t * 0.1) * 0.2 + mouse.ny * 0.1;
-            dots.rotation.y = Math.cos(t * 0.15) * 0.2 + mouse.nx * 0.1;
+            dots.rotation.x = Math.sin(t * 0.1) * 0.2;
+            dots.rotation.y = Math.cos(t * 0.15) * 0.2;
             renderer.render(scene, camera);
         }
         animate();

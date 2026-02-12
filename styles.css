@@ -66,28 +66,7 @@ button, input, select, textarea { font-family: inherit; }
 }
 
 /* ============ CUSTOM CURSOR ============ */
-.cursor {
-    width: 8px; height: 8px;
-    background: var(--red);
-    border-radius: 50%;
-    position: fixed;
-    top: 0; left: 0;
-    pointer-events: none;
-    z-index: 10000;
-    transition: transform .1s;
-    mix-blend-mode: difference;
-}
-.cursor-follower {
-    width: 36px; height: 36px;
-    border: 1.5px solid rgba(230,57,70,.5);
-    border-radius: 50%;
-    position: fixed;
-    top: 0; left: 0;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform .3s var(--ease), width .3s, height .3s, border-color .3s;
-}
-body:hover .cursor-follower { border-color: rgba(230,57,70,.5); }
+.cursor, .cursor-follower { display: none; }
 
 @media (max-width: 768px) {
     .cursor, .cursor-follower { display: none; }
